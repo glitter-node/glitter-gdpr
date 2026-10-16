@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "routes": [
+        {
+            "path": "*/admin/plugins/glitter-gdpr/consent-log",
+            "layout": "gdpr_consent_log",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:glitter-gdpr.admin.consent_log.title",
+                "permission": "glitter-gdpr.privacy.view"
+            }
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Glitter GDPR</title>
+  <desc id="desc">GDPR privacy shield, user and lock surrounded by twelve European stars</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#159bfa"/>
+      <stop offset=".48" stop-color="#1644dc"/>
+      <stop offset="1" stop-color="#852ff2"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset=".48" stop-color="#c9e2ff"/>
+      <stop offset="1" stop-color="#409cff"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#c9ddff"/>
+    </linearGradient>
+    <path id="star" d="M0-13 3.2-4.2 12.4-4 5 1.8 7.6 10.6 0 5.5-7.6 10.6-5 1.8-12.4-4-3.2-4.2Z"/>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="106" fill="url(#background)"/>
+  <path d="M16 151C140 170 213 281 312 263S437 143 496 135V122C496 63 449 16 390 16H122C63 16 16 63 16 122Z" fill="#fff" opacity=".07"/>
+  <g fill="#ffd447">
+    <use href="#star" transform="translate(256 72)"/>
+    <use href="#star" transform="translate(348 97)"/>
+    <use href="#star" transform="translate(415 164)"/>
+    <use href="#star" transform="translate(440 256)"/>
+    <use href="#star" transform="translate(415 348)"/>
+    <use href="#star" transform="translate(348 415)"/>
+    <use href="#star" transform="translate(256 440)"/>
+    <use href="#star" transform="translate(164 415)"/>
+    <use href="#star" transform="translate(97 348)"/>
+    <use href="#star" transform="translate(72 256)"/>
+    <use href="#star" transform="translate(97 164)"/>
+    <use href="#star" transform="translate(164 97)"/>
+  </g>
+  <path d="M256 132C218 156 176 170 142 178V264C142 348 190 389 256 416C322 389 370 348 370 264V178C336 170 294 156 256 132Z" fill="url(#shield)" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M256 156C221 177 190 188 164 195V265C164 329 200 365 256 390C312 365 348 329 348 265V195C322 188 291 177 256 156Z" fill="#2388f6" opacity=".24"/>
+  <circle cx="238" cy="247" r="35" fill="#0951d9"/>
+  <path d="M172 335V324C172 293 197 273 238 273S304 293 304 324V335C304 345 296 351 286 351H190C180 351 172 345 172 335Z" fill="#0951d9"/>
+  <path d="M285 299V287C285 266 301 250 322 250S359 266 359 287V308" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round"/>
+  <rect x="270" y="296" width="105" height="91" rx="19" fill="url(#lock)" stroke="#fff" stroke-width="3"/>
+  <circle cx="322" cy="332" r="13" fill="#1250d7"/>
+  <path d="M318 339H326L330 362H314Z" fill="#1250d7"/>
+</svg>

@@ -1,0 +1,224 @@
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@custom-variant dark (&:where(.dark, .dark *));
+@source "../extensions/cookie_banner.json";
+
+/**
+ * glitter-gdpr 쿠키 배너·환경설정 모달 스타일
+ *
+ * public 배너는 어떤 사용자 템플릿에서도 같은 presentation contract를 유지해야 하므로
+ * `cookie_banner.json`을 플러그인 CSS의 Tailwind source로 직접 포함합니다.
+ * 아래 직접 작성 스타일은 다음 두 가지에 한정합니다.
+ *
+ * 1. consent positioning/card container contract
+ * 2. JS 토글용 유틸리티 클래스 (`.gdpr-hidden`)
+ * 3. 자동 차단 엔진의 placeholder 스타일 (`.gdpr-blocked-embed`)
+ * 4. public consent action 공통 스타일 (`.gdpr-consent-action`)
+ *
+ * 다크 모드는 Tailwind `dark:` variant 와 OS 미디어 쿼리 양쪽 지원.
+ */
+
+/*
+ * Positioning layer는 viewport 기준 fixed 위치만 담당하고 surface를 그리지 않습니다.
+ * 실제 보이는 card는 Glitter Project Hub의 gph-container와 같은 폭/gutter 계약을 사용합니다.
+ * plugin이 template CSS의 class에 의존하지 않도록 contract를 자체 소유합니다.
+ */
+.gdpr-consent-positioner {
+    padding-inline: 1rem;
+}
+
+.gdpr-consent-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .gdpr-consent-positioner,
+    .gdpr-consent-card {
+        padding-inline: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gdpr-consent-positioner,
+    .gdpr-consent-card {
+        padding-inline: 2rem;
+    }
+}
+
+.gdpr-consent-content {
+    width: 100%;
+}
+
+/* Expanded preferences의 마지막 action 아래에도 기존 py-4 spacing scale을 유지합니다. */
+#gdpr_preferences_panel > .flex.justify-end {
+    padding-bottom: 1rem;
+}
+
+@supports (height: 100dvh) {
+    .gdpr-consent-card {
+        max-height: calc(100dvh - 2rem);
+    }
+}
+
+/* 배너/모달 숨김 토글 — JS 가 add/remove */
+.gdpr-hidden {
+    display: none !important;
+}
+
+/* 공개 동의 action 3종의 공통 outline presentation contract.
+   실제 action/API/state semantics는 cookie_banner.json에 남기고 시각 토큰만 공유한다. */
+.gdpr-consent-action {
+    @apply inline-flex items-center px-4 py-2 text-sm bg-white dark:bg-gray-800 border-2 rounded-md shadow-sm no-underline hover:no-underline focus:no-underline font-medium transition-colors;
+    color: #405862;
+    border-color: #405862;
+}
+
+.gdpr-consent-action:hover {
+    color: #344951;
+    background-color: rgba(64, 88, 98, 0.06);
+    border-color: #344951;
+}
+
+.gdpr-consent-action:active {
+    color: #293b42;
+    background-color: rgba(64, 88, 98, 0.12);
+    border-color: #293b42;
+}
+
+.gdpr-consent-action:focus-visible {
+    outline: 2px solid rgba(64, 88, 98, 0.28);
+    outline-offset: 2px;
+}
+
+.gdpr-consent-action:where(.dark, .dark *) {
+    color: #b4c3c8;
+    border-color: #8aa5aa;
+}
+
+.gdpr-consent-action:where(.dark, .dark *):hover {
+    color: #e2e8e8;
+    background-color: #2d464f;
+    border-color: #b4c3c8;
+}
+
+.gdpr-consent-action:where(.dark, .dark *):active {
+    color: #e2e8e8;
+    background-color: rgba(64, 88, 98, 0.24);
+    border-color: #e2e8e8;
+}
+
+.gdpr-consent-action:where(.dark, .dark *):focus-visible {
+    outline-color: #b4c3c8;
+}
+
+.gdpr-consent-action[aria-disabled='true'] {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.gdpr-consent-policy-link {
+    color: #405862;
+}
+
+.gdpr-consent-policy-link:hover {
+    color: #344951;
+    font-weight: 700;
+}
+
+.gdpr-consent-policy-link:active {
+    color: #293b42;
+    font-weight: 700;
+}
+
+.gdpr-consent-policy-link:focus-visible {
+    outline: 2px solid rgba(64, 88, 98, 0.28);
+    outline-offset: 2px;
+}
+
+.gdpr-consent-policy-link:where(.dark, .dark *) {
+    color: #b4c3c8;
+}
+
+.gdpr-consent-policy-link:where(.dark, .dark *):hover {
+    color: #e2e8e8;
+    font-weight: 700;
+}
+
+.gdpr-consent-policy-link:where(.dark, .dark *):active {
+    color: #e2e8e8;
+    font-weight: 700;
+}
+
+.gdpr-consent-policy-link:where(.dark, .dark *):focus-visible {
+    outline-color: #b4c3c8;
+}
+
+/* Preferences panel state controls and save action use neutral outline semantics. */
+.gdpr-consent-state {
+    @apply inline-flex items-center justify-center rounded bg-transparent px-2 py-1 text-xs text-gray-900 dark:bg-transparent dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-800;
+}
+
+.gdpr-consent-state-selected {
+    @apply border-2 border-gray-700 font-semibold dark:border-gray-300;
+}
+
+.gdpr-consent-state-not-selected {
+    @apply border border-gray-600 font-medium dark:border-gray-400;
+}
+
+.gdpr-consent-neutral-action {
+    @apply inline-flex items-center rounded border border-gray-700 bg-transparent px-4 py-2 text-xs font-medium text-gray-900 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:border-gray-300 dark:bg-transparent dark:text-gray-100 dark:hover:bg-gray-800 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-800;
+}
+
+/* Preferences controls are anchors for portable templates; suppress inherited/default link underlines only here. */
+.gdpr-consent-state-selected,
+.gdpr-consent-state-not-selected,
+.gdpr-consent-neutral-action {
+    @apply no-underline hover:no-underline focus:no-underline focus-visible:no-underline;
+}
+
+/* 자동 차단된 임베드의 플레이스홀더
+   blocker.ts 가 script/iframe 을 div.gdpr-blocked-embed 로 치환할 때 사용.
+   기본은 inline-flex 0 사이즈 (사용자에게 안 보이도록).
+   카테고리별 플레이스홀더 UI 가 필요한 경우 사이트 측에서 오버라이드 가능. */
+.gdpr-blocked-embed {
+    display: none;
+}
+
+.gdpr-blocked-embed[data-gdpr-blocked-category]:not([aria-hidden='true']) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: #6b7280; /* gray-500 */
+    background-color: #f9fafb; /* gray-50 */
+    border: 1px dashed #d1d5db; /* gray-300 */
+    border-radius: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .gdpr-blocked-embed[data-gdpr-blocked-category]:not([aria-hidden='true']) {
+        color: #9ca3af; /* gray-400 */
+        background-color: rgba(31, 41, 55, 0.5); /* gray-800/50 */
+        border-color: #4b5563; /* gray-600 */
+    }
+}
+
+/* 페이지에 .dark 클래스가 있는 경우 (Tailwind dark variant) */
+.dark .gdpr-blocked-embed[data-gdpr-blocked-category]:not([aria-hidden='true']) {
+    color: #9ca3af;
+    background-color: rgba(31, 41, 55, 0.5);
+    border-color: #4b5563;
+}
